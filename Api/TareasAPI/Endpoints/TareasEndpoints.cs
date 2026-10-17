@@ -1,63 +1,48 @@
+using Api.TareasAPI.Services;
 using TareasAPI.Models;
 
 namespace TareasAPI.Endpoints;
 
 public static class TareasEndpoints
 {
-    // Lista compartida — en producción esto sería una base de datos
-    private static List<Tarea> _tareas = new List<Tarea>
+    public static void MapTareasEndpoints(this WebApplication app)
     {
-        new Tarea { Id = 1, Titulo = "Aprender .NET", Completada = false },
-    };
+        var group = app.MapGroup("/api/tareas").WithTags("Tareas");
 
-    // Este método registra todos los endpoints del grupo
-    public static void Map(WebApplication app)
-    {
-        var group = app.MapGroup("/tareas");
+        // GET: /tareas
+        group.MapGet("/", (ITareaServices service) =>
+            Results.Ok(service.GetAllTareas())
+        );
 
-        group.MapGet("/", ObtenerTodas);
-        group.MapGet("/{id}", ObtenerPorId);
-        group.MapPost("/", Crear);
-        group.MapPut("/{id}", Actualizar);
-        group.MapDelete("/{id}", Eliminar);
-    }
+        // GET: /tareas/{id}
+        group.MapGet("/{id}", (int id, ITareaServices service) =>
+        {
+            var tarea = service.GetTareaById(id);
+            return tarea is not null
+            ? Results.NotFound(new { message = $"Tarea con id {id} no encontrada" })
+            : Results.Ok(tarea);
+        });
 
-    // ── Handlers (lógica de cada endpoint) ──────────
+        // POST: /tareas
+        group.MapPost("/", (Tarea nuevatarea, ITareaServices service) =>
+        {
+            var creada = service.CreateTarea(nuevatarea);
+            return Results.Created($"/api/tareas/{creada.Id}", creada); //201
+        });
 
-    static IResult ObtenerTodas()
-        => Results.Ok(_tareas);
+        // PUT: /tareas/{id}
+        group.MapPut("/{id}", (int id, Tarea tarea, ITareaServices service) =>
+            service.UpdateTarea(id, tarea)
+                ? Results.NoContent() //204 
+                : Results.NotFound(new { message = $"Tarea con id {id} no encontrada" })
+        );
 
-    static IResult ObtenerPorId(int id)
-    {
-        var t = _tareas.FirstOrDefault(t => t.Id == id);
-        return t == null ? Results.NotFound() : Results.Ok(t);
-    }
-
-    static IResult Crear(Tarea nueva)
-    {
-        nueva.Id = _tareas.Count > 0 ? _tareas.Max(t => t.Id) + 1 : 1;
-        _tareas.Add(nueva);
-        return Results.Created($"/tareas/{nueva.Id}", nueva);
-    }
-
-    static IResult Actualizar(int id, Tarea actualizada)
-    {
-        var t = _tareas.FirstOrDefault(t => t.Id == id);
-        if (t == null) return Results.NotFound();
-
-        t.Titulo = actualizada.Titulo;
-        t.Descripcion = actualizada.Descripcion;
-        t.Completada = actualizada.Completada;
-        return Results.NoContent();
-    }
-
-    static IResult Eliminar(int id)
-    {
-        var t = _tareas.FirstOrDefault(t => t.Id == id);
-        if (t == null) return Results.NotFound();
-
-        _tareas.Remove(t);
-        return Results.NoContent();
+        // DELETE: /tareas/{id}
+        group.MapDelete("/{id}", (int id, Tarea tarea, ITareaServices service) =>
+            service.DeleteTarea(id)
+                ? Results.NoContent() //204
+                : Results.NotFound(new { message = $"Tarea con id {id} no encontrada" })
+        );
     }
 }
 
