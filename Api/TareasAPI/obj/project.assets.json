@@ -454,27 +454,27 @@
   "projectFileDependencyGroups": {
     "net10.0": [
       "Swashbuckle.AspNetCore >= 10.2.3",
-      "Swashbuckle.AspNetCore.SwaggerUi >= 10.2.3"
+      "Swashbuckle.AspNetCore.SwaggerUI >= 10.2.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\diazd\\.nuget\\packages\\": {},
+    "C:\\Users\\Omar\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\diazd\\OneDrive\\Desktop\\movil\\app_movil\\Api\\TareasAPI\\TareasAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Omar\\Desktop\\UPA\\Cuatri_9\\Moviles\\MarcoMoviles\\Api\\TareasAPI\\TareasAPI.csproj",
       "projectName": "TareasAPI",
-      "projectPath": "C:\\Users\\diazd\\OneDrive\\Desktop\\movil\\app_movil\\Api\\TareasAPI\\TareasAPI.csproj",
-      "packagesPath": "C:\\Users\\diazd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\diazd\\OneDrive\\Desktop\\movil\\app_movil\\Api\\TareasAPI\\obj\\",
+      "projectPath": "C:\\Users\\Omar\\Desktop\\UPA\\Cuatri_9\\Moviles\\MarcoMoviles\\Api\\TareasAPI\\TareasAPI.csproj",
+      "packagesPath": "C:\\Users\\Omar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Omar\\Desktop\\UPA\\Cuatri_9\\Moviles\\MarcoMoviles\\Api\\TareasAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\diazd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Omar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -513,7 +513,7 @@
             "target": "Package",
             "version": "[10.2.3, )"
           },
-          "Swashbuckle.AspNetCore.SwaggerUi": {
+          "Swashbuckle.AspNetCore.SwaggerUI": {
             "target": "Package",
             "version": "[10.2.3, )"
           }

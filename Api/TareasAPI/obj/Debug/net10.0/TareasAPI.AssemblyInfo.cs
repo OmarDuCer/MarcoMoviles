@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TareasAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2587c1b22a762b2713bc8c6e6b7a8087b33951de")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("TareasAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TareasAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
