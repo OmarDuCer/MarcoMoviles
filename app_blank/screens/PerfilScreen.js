@@ -1,0 +1,23 @@
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function PerfilScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}> Pantalla de perfil </Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'blue',
+  },
+
+  title: {
+    fontSize: 24,
+    marginTop: 20,
+  },
+});

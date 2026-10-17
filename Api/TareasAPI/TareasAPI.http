@@ -1,0 +1,42 @@
+@TareasAPI_HostAddress = https://localhost:7294
+
+### Obtener todas las tareas
+GET {{TareasAPI_HostAddress}}/tareas
+Accept: application/json
+
+###
+
+### Obtener una tarea por ID
+GET {{TareasAPI_HostAddress}}/tareas/1
+Accept: application/json
+
+###
+
+### Crear una tarea
+POST {{TareasAPI_HostAddress}}/tareas
+Content-Type: application/json
+
+{
+  "titulo": "Estudiar Swagger",
+  "descripcion": "Aprender a usar la interfaz",
+  "completada": false
+}
+
+###
+
+### Actualizar una tarea
+PUT {{TareasAPI_HostAddress}}/tareas/1
+Content-Type: application/json
+
+{
+  "titulo": "Aprender .NET",
+  "descripcion": "Terminar el tutorial de Minimal APIs",
+  "completada": true
+}
+
+###
+
+### Eliminar tarea con ID 1
+DELETE {{TareasAPI_HostAddress}}/tareas/1
+
+###
