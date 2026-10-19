@@ -8,6 +8,7 @@ import DetalleScreen from './screens/DetalleScreen';
 import FormularioScreen from './screens/FormularioScreen';
 import PerfilScreen from './screens/PerfilScreen';
 import LicenciaScreen from './screens/LicenciaScreen';
+import TareasScreen from './screens/TareasScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,6 +31,9 @@ export default function App() {
           else if (route.name === 'Licencia') {
             iconName = 'document';
           }
+          else if (route.name === 'Tareas') {
+            iconName = 'list';
+          }
           return <Ionicons name={iconName} size={size} color={color} />;
 
         },
@@ -47,6 +51,8 @@ export default function App() {
         <Tab.Screen name="Perfil" component={PerfilScreen} />
 
         <Tab.Screen name= "Licencia" component={LicenciaScreen} />
+
+        <Tab.Screen name="Tareas" component={TareasScreen} />
 
       </Tab.Navigator>
     </NavigationContainer>
