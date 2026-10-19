@@ -28,6 +28,9 @@ if (app.Environment.IsDevelopment())
 app.MapGet("/", () => Results.Ok(new { mensaje = "TareasAPI funcionando. Documentación en /swagger" }))
     .ExcludeFromDescription();
 
+// Sirve los archivos de la carpeta wwwroot (el front: index.html)
+app.UseStaticFiles();
+
 // Map the Tarea endpoints
 app.MapTareaEndpoints();
 

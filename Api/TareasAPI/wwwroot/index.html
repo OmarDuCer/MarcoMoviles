@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tareas</title>
+</head>
+<body>
+  <h1>Tareas</h1>
+
+  <h2>Buscar por Id</h2>
+  <input id="idBuscar" type="number" placeholder="Id">
+  <button onclick="buscar()">Buscar</button>
+
+  <h2>Crear tarea</h2>
+  <input id="titulo" placeholder="Título">
+  <input id="descripcion" placeholder="Descripción">
+  <label><input id="completada" type="checkbox"> Completada</label>
+  <button onclick="crear()">Crear</button>
+
+  <h2>Eliminar por Id</h2>
+  <input id="idEliminar" type="number" placeholder="Id">
+  <button onclick="eliminar()">Eliminar</button>
+
+  <h2>Resultado</h2>
+  <pre id="resultado"></pre>
+
+  <script>
+    const api = "/tareas";
+    const resultado = document.getElementById("resultado");
+
+    // GET /tareas/{id}
+    async function buscar() {
+      const id = document.getElementById("idBuscar").value;
+      if (!id) { resultado.textContent = "Escribe un Id"; return; }
+
+      const res = await fetch(api + "/" + id);
+      const datos = await res.json();
+      resultado.textContent = JSON.stringify(datos, null, 2);
+    }
+
+    // POST /tareas
+    async function crear() {
+      const tarea = {
+        titulo: document.getElementById("titulo").value,
+        descripcion: document.getElementById("descripcion").value,
+        completada: document.getElementById("completada").checked
+      };
+
+      const res = await fetch(api, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tarea)
+      });
+      const datos = await res.json();
+      resultado.textContent = "Tarea creada:\n" + JSON.stringify(datos, null, 2);
+    }
+
+    // DELETE /tareas/{id}
+    async function eliminar() {
+      const id = document.getElementById("idEliminar").value;
+      if (!id) { resultado.textContent = "Escribe un Id"; return; }
+
+      const res = await fetch(api + "/" + id, { method: "DELETE" });
+      resultado.textContent = res.ok
+        ? "Tarea " + id + " eliminada"
+        : "Tarea no encontrada";
+    }
+  </script>
+</body>
+</html>
