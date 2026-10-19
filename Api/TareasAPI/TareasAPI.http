@@ -1,42 +1,60 @@
-@TareasAPI_HostAddress = https://localhost:7294
+# ============================================================================
+#  TareasAPI.http  —  Pruebas rápidas sin salir de VS Code
+# ============================================================================
+#
+#  Instala la extensión "REST Client" en VS Code y aparecerá un botón
+#  "Send Request" encima de cada petición. Al hacer clic, se envía y ves la
+#  respuesta en una pestaña al lado.
+#
+#  Los ### separan una petición de otra.
+# ============================================================================
 
-### Obtener todas las tareas
-GET {{TareasAPI_HostAddress}}/tareas
+# Variable para no repetir la dirección en cada petición.
+@host = http://localhost:5134
+
+### 1) Mensaje de bienvenida (comprueba que la API está viva)
+GET {{host}}/
+
+### 2) Obtener TODAS las tareas
+GET {{host}}/tareas
 Accept: application/json
 
-###
-
-### Obtener una tarea por ID
-GET {{TareasAPI_HostAddress}}/tareas/1
+### 3) Obtener UNA tarea por su Id
+GET {{host}}/tareas/1
 Accept: application/json
 
-###
+### 4) Pedir una tarea que no existe → debe responder 404
+GET {{host}}/tareas/999
 
-### Crear una tarea
-POST {{TareasAPI_HostAddress}}/tareas
+### 5) Crear una tarea nueva
+#    Fíjate que NO enviamos "id": lo genera el servidor.
+POST {{host}}/tareas
 Content-Type: application/json
 
 {
   "titulo": "Estudiar Swagger",
-  "descripcion": "Aprender a usar la interfaz",
+  "descripcion": "Aprender a usar la interfaz de pruebas",
   "completada": false
 }
 
-###
-
-### Actualizar una tarea
-PUT {{TareasAPI_HostAddress}}/tareas/1
+### 6) Intentar crear una tarea SIN título → debe responder 400
+POST {{host}}/tareas
 Content-Type: application/json
 
 {
-  "titulo": "Aprender .NET",
-  "descripcion": "Terminar el tutorial de Minimal APIs",
+  "titulo": "",
+  "descripcion": "Esta no se debería guardar"
+}
+
+### 7) Actualizar la tarea 1 (hay que enviar TODOS los campos)
+PUT {{host}}/tareas/1
+Content-Type: application/json
+
+{
+  "titulo": "Aprender .NET 10",
+  "descripcion": "Tutorial terminado",
   "completada": true
 }
 
-###
-
-### Eliminar tarea con ID 1
-DELETE {{TareasAPI_HostAddress}}/tareas/1
-
-###
+### 8) Eliminar la tarea 2
+DELETE {{host}}/tareas/2

@@ -1,0 +1,24 @@
+# ============================================================================
+#  compose.yaml  —  Arrancar la API con un solo comando
+# ============================================================================
+#
+#      docker compose up --build
+#
+#  Luego abre http://localhost:5134/swagger
+#  Para detenerla: Ctrl + C (o `docker compose down`).
+# ============================================================================
+
+services:
+  api:
+    build: .
+    image: tareasapi
+    container_name: tareasapi
+    ports:
+      # "puerto de tu computadora : puerto dentro del contenedor"
+      # Usamos 5134 afuera para que sea el mismo que con `dotnet run`.
+      - "5134:8080"
+    environment:
+      # En modo Development se activa Swagger (/swagger). En un servidor real
+      # cambia esto a "Production" para no exponer la documentación.
+      ASPNETCORE_ENVIRONMENT: Development
+    restart: unless-stopped

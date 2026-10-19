@@ -1,11 +1,12 @@
+namespace TAREASAPI.Models;
+
 public class Licencia
 {
-    public string numeroLicencia { get; set; } = string.Empty;
-    public string nombre { get; set; } = string.Empty;
-    public string tipoLicencia { get; set; } = string.Empty;
-    public string fechaNacimiento { get; set; } = string.Empty;
-    public string fechaVencimiento { get; set; } = string.Empty;
-    public string direccion { get; set; } = string.Empty;
-    public bool estado { get; set; } = true;
-    
+    public required string IdLicencia { get; set; }
+    public string Nombre { get; set; } = string.Empty;
+    public string FechaNacimiento { get; set; } = string.Empty;
+    public string FechaExpiracion { get; set; } = string.Empty;
+    public string TipoLicencia { get; set; } = string.Empty;
+    public string Direccion { get; set; } = string.Empty;
+    public bool Estado { get; set; } = true;
 }
